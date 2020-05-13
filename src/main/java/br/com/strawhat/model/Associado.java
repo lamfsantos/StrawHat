@@ -9,11 +9,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity(name = "associado")
@@ -33,7 +31,8 @@ public class Associado implements Serializable {
 	private String endereco;
 	private String telefone;
 
-	private String dataDeNascimento;
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private Date dataDeNascimento;
 
 	@OneToMany(mappedBy = "associado", cascade = CascadeType.ALL)
 	private List<Mensalidade> mensalidades = new ArrayList<>();
@@ -45,7 +44,7 @@ public class Associado implements Serializable {
 	}
 
 	public Associado(Integer id, String nome, String cpf, String rg, String endereco, String telefone,
-			String dataDeNascimento) {
+			Date dataDeNascimento) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -103,11 +102,11 @@ public class Associado implements Serializable {
 		this.telefone = telefone;
 	}
 
-	public String getDataDeNascimento() {
+	public Date getDataDeNascimento() {
 		return dataDeNascimento;
 	}
 
-	public void setDataDeNascimento(String dataDeNascimento) {
+	public void setDataDeNascimento(Date dataDeNascimento) {
 		this.dataDeNascimento = dataDeNascimento;
 	}
 

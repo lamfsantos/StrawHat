@@ -6,8 +6,7 @@ import java.util.Date;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 import br.com.strawhat.model.Associado;
 
 public class AssociadoDTO implements Serializable{
@@ -25,7 +24,8 @@ private static final long serialVersionUID = 1L;
 	@NotEmpty(message = "Preenchimento Obrigatório")
 	private String telefone;
 
-	private String dataDeNascimento;
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private Date dataDeNascimento;
 
 	public AssociadoDTO() {}
 
@@ -87,11 +87,11 @@ private static final long serialVersionUID = 1L;
 		this.telefone = telefone;
 	}
 
-	public String getDataDeNascimento() {
+	public Date getDataDeNascimento() {
 		return dataDeNascimento;
 	}
 
-	public void setDataDeNascimento(String dataDeNascimento) {
+	public void setDataDeNascimento(Date dataDeNascimento) {
 		this.dataDeNascimento = dataDeNascimento;
 	}
 }
