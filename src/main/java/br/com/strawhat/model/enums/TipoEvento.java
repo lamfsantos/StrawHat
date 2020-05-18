@@ -1,11 +1,11 @@
 package br.com.strawhat.model.enums;
 
 public enum TipoEvento {
-	BATISMO(1, "Batismo"),
-	ABERTURADEGIRA(2, "Abertura de Gira"),
-	CORTE(3, "Corte"),
-	SANTO(4, "Santo"),
-	TOALHADEOXALA(5, "Toalha de Oxalá");
+	BATISMO(0, "Batismo"),
+	ABERTURADEGIRA(1, "Abertura de Gira"),
+	CORTE(2, "Corte"),
+	SANTO(3, "Santo"),
+	TOALHADEOXALA(4, "Toalha de Oxalá");
 	
 	private Integer id;
 	private String descricao;

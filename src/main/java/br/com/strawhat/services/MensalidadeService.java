@@ -55,4 +55,13 @@ public class MensalidadeService {
 		return repo.findAll(pageRequest);
 	}
 
+	public List<Mensalidade> findBetweenDates(String startDate, String endDate) {
+		return repo.findBetweenDates(startDate, endDate);
+	}
+
+	public String formatDate(String date) {
+		String fomated = date.substring(1, 11).replace("/", "-");
+		String reversed = fomated.substring(6, 10) + fomated.substring(2, 6) + fomated.substring(0, 2);
+		return reversed;
+	}
 }

@@ -11,42 +11,45 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity(name = "mensalidade")
-public class Mensalidade implements Serializable{
+public class Mensalidade implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date data;
-	
+
 	private Double valor;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "associado_id")
 	private Associado associado;
-	
-	public Mensalidade() {}
-	
+
+	public Mensalidade() {
+	}
+
 	public Mensalidade(Integer id, Date data, Double valor) {
 		this.id = id;
 		this.data = data;
 		this.valor = valor;
 	}
+
 	public Date getData() {
 		return data;
 	}
+
 	public void setData(Date data) {
 		this.data = data;
 	}
+
 	public Double getValor() {
 		return valor;
 	}
+
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
@@ -59,12 +62,12 @@ public class Mensalidade implements Serializable{
 		this.id = id;
 	}
 
-	@JsonIgnore
+	// @JsonIgnore
 	public Associado getAssociado() {
 		return associado;
 	}
 
-	@JsonProperty
+	// @JsonProperty
 	public void setAssociado(Associado associado) {
 		this.associado = associado;
 	}

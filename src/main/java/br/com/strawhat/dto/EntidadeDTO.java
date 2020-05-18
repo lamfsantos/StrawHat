@@ -1,18 +1,19 @@
 package br.com.strawhat.dto;
 
-import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.validation.constraints.NotEmpty;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.strawhat.model.Entidade;
 
 public class EntidadeDTO {
 	private Integer id;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private Date data;
+	//O tipo da data aqui é string, porque o back recebe do front a
+	//data com o formato dd/mm e tem que se encarregar de adicionar
+	//o ano no método fromDTO antes de inserir no banco
+	private String data;
 	
 	@NotEmpty(message = "Preenchimento Obrigatório")
 	private String nome;
@@ -22,7 +23,9 @@ public class EntidadeDTO {
 	public EntidadeDTO(Entidade obj) {
 		this.id = obj.getId();
 		this.nome = obj.getNome();
-		this.data = obj.getData();
+		
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		this.data = df.format(obj.getData());
 	}
 
 	public Integer getId() {
@@ -33,11 +36,11 @@ public class EntidadeDTO {
 		this.id = id;
 	}
 
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 

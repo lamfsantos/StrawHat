@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity(name = "associado")
 public class Associado implements Serializable {
@@ -110,10 +112,12 @@ public class Associado implements Serializable {
 		this.dataDeNascimento = dataDeNascimento;
 	}
 
+	@JsonIgnore
 	public List<Mensalidade> getMensalidades() {
 		return mensalidades;
 	}
 
+	@JsonProperty
 	public void setMensalidades(List<Mensalidade> mensalidades) {
 		this.mensalidades = mensalidades;
 	}

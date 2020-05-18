@@ -1,6 +1,7 @@
 package br.com.strawhat.resources;
 
 import java.net.URI;
+import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,8 +35,8 @@ public class EntidadeResources {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody EntidadeDTO objDto){
-		Entidade obj = service.fromDTO(objDto);
+	public ResponseEntity<Void> insert(@Valid @RequestBody EntidadeDTO objDto) throws ParseException{
+		Entidade obj = service.fromDTOInsert(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -43,8 +44,8 @@ public class EntidadeResources {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody EntidadeDTO objDto, @PathVariable Integer id){
-		Entidade obj = service.fromDTO(objDto);
+	public ResponseEntity<Void> update(@Valid @RequestBody EntidadeDTO objDto, @PathVariable Integer id) throws ParseException{
+		Entidade obj = service.fromDTOInsert(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();

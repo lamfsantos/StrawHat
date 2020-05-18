@@ -1,5 +1,8 @@
 package br.com.strawhat.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,7 +58,18 @@ public class EntidadeService {
 		return repo.findAll(pageRequest);
 	}
 
-	public Entidade fromDTO(EntidadeDTO objDto) {
-		return new Entidade(objDto.getId(), objDto.getData(), objDto.getNome());
+	//O método fromDTOInsert se encarrega de adicionar um ano a data que foi recebida do front
+	//já que o front envia somente dia e mês. O ano aqui não importa, é simplesmente para
+	//garantir a correta inserção do tipo date no mysql, as consultas vão ser feitas de acordo
+	//com o mês, desconsiderando o ano.
+	public Entidade fromDTOInsert(EntidadeDTO objDto) throws ParseException {
+		String data = objDto.getData() + "/2020";
+		Date dataFormatada = new SimpleDateFormat("dd/MM/yyy").parse(data);
+		return new Entidade(objDto.getId(), dataFormatada , objDto.getNome());
+	}
+	
+	public Entidade fromDTO(EntidadeDTO objDto) throws ParseException {
+		Date dataFormatada = new SimpleDateFormat("dd/MM/yyy").parse(objDto.getData());
+		return new Entidade(objDto.getId(), dataFormatada , objDto.getNome());
 	}
 }

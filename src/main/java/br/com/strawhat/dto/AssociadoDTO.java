@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.strawhat.model.Associado;
 
-public class AssociadoDTO implements Serializable{
-private static final long serialVersionUID = 1L;
+public class AssociadoDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 
@@ -27,7 +27,8 @@ private static final long serialVersionUID = 1L;
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataDeNascimento;
 
-	public AssociadoDTO() {}
+	public AssociadoDTO() {
+	}
 
 	public AssociadoDTO(Associado obj) {
 		this.id = obj.getId();
